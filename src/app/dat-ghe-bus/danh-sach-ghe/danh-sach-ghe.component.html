@@ -24,7 +24,7 @@
                     <ng-container *ngFor='let item of mangGhe '>
                         <p *ngIf='item.TrangThai == true'>Ghế :số {{item.SoGhe}} ${{item.Gia}} <button class="btn btn-danger" (click)='huyGhe(item)'>Huỷ</button> </p>
                     </ng-container>
-
+                    <p>Tổng tiền :${{tongTien}}</p>
                 </div>
             </div>
 

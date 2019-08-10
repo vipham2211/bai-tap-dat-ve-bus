@@ -11,7 +11,7 @@ export class DanhSachGheComponent implements OnInit {
   @ViewChildren(ItemGheComponent) tagListItemGhe:QueryList<ItemGheComponent>;
 
   soGheDaDat:number = 0;
-
+  tongTien:number = 0;
   mangGhe:any = [
     { SoGhe: 1, TenGhe: "số 1", Gia: 100, TrangThai: false },
     { SoGhe: 2, TenGhe: "số 2", Gia: 100, TrangThai: false },
@@ -59,10 +59,12 @@ gheDaDat(trangThaiGhe,ghe){
  if(trangThaiGhe == true){
   this.mangGhe[index].TrangThai = true;
   this.soGheDaDat++
+  this.tongTien += ghe.Gia;
  }
  else{
   this.mangGhe[index].TrangThai = false;
   this.soGheDaDat--
+  this.tongTien -=  ghe.Gia;
  }
 
 
@@ -79,6 +81,7 @@ if(item.ghe ==ghe){
   ghe.TrangThai = false;
   item.trangThaiGhe = false;
   this.soGheDaDat--
+  this.tongTien -=  ghe.Gia;
 }
 
   })
