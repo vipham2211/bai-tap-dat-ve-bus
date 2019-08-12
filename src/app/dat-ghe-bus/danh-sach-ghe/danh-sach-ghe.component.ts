@@ -12,6 +12,7 @@ export class DanhSachGheComponent implements OnInit {
 
   soGheDaDat:number = 0;
   tongTien:number = 0;
+  mangGheDaDat:any = [];
   mangGhe:any = [
     { SoGhe: 1, TenGhe: "số 1", Gia: 100, TrangThai: false },
     { SoGhe: 2, TenGhe: "số 2", Gia: 100, TrangThai: false },
@@ -43,7 +44,7 @@ export class DanhSachGheComponent implements OnInit {
     { SoGhe: 28, TenGhe: "số 28", Gia: 100, TrangThai: false },
     { SoGhe: 29, TenGhe: "số 29", Gia: 100, TrangThai: false },
     { SoGhe: 30, TenGhe: "số 30", Gia: 100, TrangThai: false },
-    { SoGhe: 31, TenGhe: "số 31", Gia: 100, TrangThai: false },
+    { SoGhe: 31, TenGhe: "số 31", Gia: 100, TrangThai: true },
     { SoGhe: 32, TenGhe: "số 32", Gia: 100, TrangThai: false },
     { SoGhe: 33, TenGhe: "số 33", Gia: 100, TrangThai: false },
     { SoGhe: 34, TenGhe: "số 34", Gia: 100, TrangThai: false },
@@ -51,39 +52,38 @@ export class DanhSachGheComponent implements OnInit {
     { SoGhe: 36, TenGhe: "số 36", Gia: 100, TrangThai: false },
   ];
 
+  
 
 gheDaDat(trangThaiGhe,ghe){
 
- let index = this.mangGhe.findIndex(item => item ==ghe)
+  let index = this.mangGheDaDat.findIndex(item => ghe===item)
 
- if(trangThaiGhe == true){
-  this.mangGhe[index].TrangThai = true;
-  this.soGheDaDat++
-  this.tongTien += ghe.Gia;
- }
- else{
-  this.mangGhe[index].TrangThai = false;
-  this.soGheDaDat--
-  this.tongTien -=  ghe.Gia;
- }
 
+if(trangThaiGhe){
+  this.mangGheDaDat.push(ghe);
+  this.tongTien += ghe.Gia
+}
+else{
+  this.mangGheDaDat.splice(index,1)
+}
+
+console.log(trangThaiGhe)
 
 
 
 
 }
+huyGhe(soGhe,i){
 
-huyGhe(ghe){
-  this.tagListItemGhe.map(item =>{
 
+  this.tagListItemGhe.map(item => {
     
-if(item.ghe ==ghe){
-  ghe.TrangThai = false;
-  item.trangThaiGhe = false;
-  this.soGheDaDat--
-  this.tongTien -=  ghe.Gia;
-}
-
+    if (item.ghe.SoGhe == soGhe){
+      this.mangGheDaDat.splice(i,1)
+      item.trangThaiGhe = false;
+      this.tongTien -= item.ghe.Gia
+    }
+   
   })
 }
 
